@@ -1,0 +1,21 @@
+<div class="layout layout-align-center">
+  <form class="layout-column sign-up" (ngSubmit)="signUp()">
+    <h1>Sign Up</h1>
+    <mat-form-field>
+      <input matInput placeholder="Full name" type="text" required
+        [(ngModel)]="user.name" name="name">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" required
+        [(ngModel)]="user.email" name="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Password" type="password" required
+        [(ngModel)]="user.password" name="password">      
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="submit-btn">Sign Up</button>
+  </form>
+</div>

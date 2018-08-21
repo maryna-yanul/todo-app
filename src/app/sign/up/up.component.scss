@@ -1,0 +1,7 @@
+.sign-up {
+  width: 500px;
+
+  @media (max-width: 475px) { // TODO: use var
+    max-width: 300px;
+  }
+}
