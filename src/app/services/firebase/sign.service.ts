@@ -11,7 +11,6 @@ export class SignService {
 
   constructor() {
     this.auth().onAuthStateChanged(user => {
-      console.log('change: ', user);
       this.user = user;
     });
   }
@@ -24,8 +23,6 @@ export class SignService {
         currentUser.updateProfile({
           displayName: userInfo.name
         })
-        .then(() => console.log('ok'))
-        .catch(err => console.error('Err: ', err));
       });
   }
 
