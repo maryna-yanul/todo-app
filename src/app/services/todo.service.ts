@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatabaseService } from './firebase/database.service';
 import { StorageService } from './firebase/storage.service';
+import { SignService } from './firebase/sign.service';
 
 
 @Injectable({
@@ -10,11 +11,14 @@ export class TodoService {
 
   constructor(
     private database: DatabaseService,
-    private storage: StorageService
+    private storage: StorageService,
+    private auth: SignService
   ) { }
 
   create(todo, todoImages) {
-    return this.database.createWithId('todo', todo)
+    const { uid } = this.auth.user;
+
+    return this.database.createWithId(`todo/${uid}`, todo)
       .then(async ref => {
         try {
           const urls = await this.storage.uploadImages(todoImages)

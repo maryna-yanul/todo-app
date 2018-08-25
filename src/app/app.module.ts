@@ -25,13 +25,14 @@ import { TodoModule } from './todo/todo.module';
     TodoModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+      closeButton: true
     })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
   constructor() {
     firebase.initializeApp(config);
