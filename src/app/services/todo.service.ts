@@ -14,12 +14,15 @@ export class TodoService {
   ) { }
 
   create(todo, todoImages) {
-    this.database.createWithId('todo', todo)
+    return this.database.createWithId('todo', todo)
       .then(async ref => {
-        const urls = await this.storage.uploadImages(todoImages)
+        try {
+          const urls = await this.storage.uploadImages(todoImages)
 
-        ref.update({ images: urls })
+          ref.update({ images: urls })
+        } catch(err) {
+          return { err, ref }
+        }
       })
-      .catch(error => console.error(error))
   }
 }

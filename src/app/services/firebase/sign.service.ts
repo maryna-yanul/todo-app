@@ -17,11 +17,12 @@ export class SignService {
 
   up(userInfo: User) {
     return this.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-      .then(result => {
+      .then(() => {
         const { currentUser } = this.auth();
 
         currentUser.updateProfile({
-          displayName: userInfo.name
+          displayName: userInfo.name,
+          photoURL: null // TODO: implemented photo for user
         })
       });
   }

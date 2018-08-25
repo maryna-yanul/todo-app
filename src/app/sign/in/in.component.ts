@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 import { SignService } from '../../services/firebase/sign.service';
 
 @Component({
@@ -14,13 +16,15 @@ export class InComponent implements OnInit {
   };
 
   constructor(
-    private sign: SignService
+    private sign: SignService,
+    private toast: ToastrService
   ) { }
 
   ngOnInit() {
   }
 
   signIn() {
-    this.sign.in(this.user);
+    this.sign.in(this.user)
+      .catch(err => this.toast.error(err.message, 'Error', { disableTimeOut: true }));
   }
 }

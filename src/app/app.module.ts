@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as firebase from 'firebase';
+import { ToastrModule } from 'ngx-toastr';
 
 import { config } from '../environments/database'
 
@@ -22,11 +23,15 @@ import { TodoModule } from './todo/todo.module';
     AppRoutingModule,
     SignModule,
     TodoModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor() {
     firebase.initializeApp(config);
