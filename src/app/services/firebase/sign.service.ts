@@ -6,19 +6,19 @@ import { User } from '../../shared/class/user';
   providedIn: 'root'
 })
 export class SignService {
-  private auth = auth;
+  default = auth;
   user;
 
   constructor() {
-    this.auth().onAuthStateChanged(user => {
+    this.default().onAuthStateChanged(user => {
       this.user = user;
     });
   }
 
   up(userInfo: User) {
-    return this.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
+    return this.default().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
       .then(() => {
-        const { currentUser } = this.auth();
+        const { currentUser } = this.default();
 
         currentUser.updateProfile({
           displayName: userInfo.name,
@@ -28,11 +28,11 @@ export class SignService {
   }
 
   in(userInfo) {
-    return this.auth().signInWithEmailAndPassword(userInfo.email, userInfo.password);
+    return this.default().signInWithEmailAndPassword(userInfo.email, userInfo.password);
   }
 
   out() {
-    return this.auth().signOut().then(function() {
+    return this.default().signOut().then(function() {
       console.log('Signed Out');
     }, function(error) {
       console.error('Sign Out Error', error);
