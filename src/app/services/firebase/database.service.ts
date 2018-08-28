@@ -33,6 +33,14 @@ export class DatabaseService {
   }
 
   delete(path) {
-    this.default.ref(path).set(null);
+    return this.default.ref(path).set(null);
+  }
+
+  getDataByKeyAndValue(path, key, value) {
+    return this.default.ref(path).orderByChild(key).equalTo(value);
+  }
+
+  update(path, values) {
+    return this.default.ref(path).update(values)
   }
 }

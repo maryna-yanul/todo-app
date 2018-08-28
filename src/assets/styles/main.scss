@@ -1,4 +1,8 @@
-@import "./varaibles.scss";
+@import "./material-varaibles.scss";
 @import "./mixin";
 @import "./typography.scss";
 @import "./layout";
+
+body {
+  background-color: #ACADBC;
+}
