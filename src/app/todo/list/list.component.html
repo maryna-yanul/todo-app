@@ -1,0 +1,65 @@
+<div class="dndPlaceholder"
+    #placeholder></div>
+<div class="layout todo-list">
+  <div class="flex-25 backlog"
+    [dndList]
+    [dndPlaceholder]="placeholder"
+    [dndModel]="backlog">
+    <div class="backlog__title">
+      Backlog
+    </div>
+    <div *ngFor="let todo of backlog"
+      class="backlog__todo-conteiner"
+      [dndType]="'todo'"
+      (dndMoved)="todoMoved(todo, backlog)"
+      [dndDraggable]="{draggable:true, effectAllowed:'move'}"
+      [dndDraggable]
+      [dndObject]="todo">{{todo.title}}</div>
+  </div>
+  <div class="flex-25 todos"
+    [dndList]
+    [dndModel]="todos"
+    [dndPlaceholder]="placeholder">
+    <div class="todos__title">
+      Todo
+    </div>
+    <div *ngFor="let todo of todos"
+      class="todos__todo-conteiner"
+      [dndType]="'todo'"
+      (dndMoved)="todoMoved(todo, todos)"
+      [dndDraggable]="{draggable:true, effectAllowed:'move'}"
+      (dndCopied)="moved($event)"
+      [dndDraggable]
+      [dndObject]="todo">{{todo.title}}</div>
+  </div>
+  <div class="flex-25 in-progress"
+    [dndList]
+    [dndPlaceholder]="placeholder"
+    [dndModel]="inProgress">
+    <div class="in-progress__title">
+      In Progress
+    </div>
+    <div *ngFor="let todo of inProgress"
+      class="in-progress__todo-conteiner"
+      [dndType]="'todo'"
+      (dndMoved)="todoMoved(todo, inProgress)"
+      [dndDraggable]="{draggable:true, effectAllowed:'move'}"
+      [dndDraggable]
+      [dndObject]="todo">{{todo.title}}</div>
+  </div>
+  <div class="flex-25 completed"
+    [dndList]
+    [dndModel]="completed"
+    [dndPlaceholder]="placeholder">
+    <div class="completed__title">
+      Completed
+    </div>
+    <div *ngFor="let todo of completed"
+      class="completed__todo-conteiner"
+      [dndType]="'todo'"
+      (dndMoved)="todoMoved(todo, completed)"
+      [dndDraggable]="{draggable:true, effectAllowed:'move'}"
+      [dndDraggable]
+      [dndObject]="todo">{{todo.title}}</div>
+  </div>
+</div>

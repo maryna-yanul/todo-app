@@ -9,8 +9,10 @@ import {
   MatNativeDateModule,
   MatSelectModule
 } from '@angular/material';
+import { DndListModule } from 'ngx-drag-and-drop-lists';
 
 import { NewTodoComponent } from './new-todo/new-todo.component';
+import { ListComponent } from './list/list.component';
 
 const materialModules = [
   MatFormFieldModule,
@@ -25,10 +27,12 @@ const materialModules = [
   imports: [
     CommonModule,
     ...materialModules,
-    FormsModule
+    FormsModule,
+    DndListModule
   ],
   declarations: [
-    NewTodoComponent
+    NewTodoComponent,
+    ListComponent
   ]
 })
 export class TodoModule { }
