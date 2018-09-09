@@ -9,10 +9,13 @@ import {
   MatNativeDateModule,
   MatSelectModule
 } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 import { DndListModule } from 'ngx-drag-and-drop-lists';
 
 import { NewTodoComponent } from './new-todo/new-todo.component';
 import { ListComponent } from './list/list.component';
+import { EditComponent } from './edit/edit.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 const materialModules = [
   MatFormFieldModule,
@@ -20,7 +23,8 @@ const materialModules = [
   MatButtonModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSelectModule
+  MatSelectModule,
+  MatIconModule
 ]
 
 @NgModule({
@@ -28,11 +32,13 @@ const materialModules = [
     CommonModule,
     ...materialModules,
     FormsModule,
-    DndListModule
+    DndListModule,
+    AppRoutingModule
   ],
   declarations: [
     NewTodoComponent,
-    ListComponent
+    ListComponent,
+    EditComponent
   ]
 })
 export class TodoModule { }

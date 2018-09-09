@@ -15,7 +15,9 @@
         (dndMoved)="todoMoved(todo, backlog)"
         [dndDraggable]
         [dndDragDisabled]="isMobile"
-        [dndObject]="todo">{{todo.title}}</div>
+        [dndObject]="todo">
+          <a>{{todo.title}}</a>
+        </div>
     </div>
     <div class="flex-25 todos"
       [dndList]
@@ -31,7 +33,9 @@
         (dndCopied)="moved($event)"
         [dndDraggable]
         [dndDragDisabled]="isMobile"
-        [dndObject]="todo">{{todo.title}}</div>
+        [dndObject]="todo">
+          <a>{{todo.title}}</a>
+        </div>
     </div>
   </div>
   <div class="layout layout-align-space-around right-list">
@@ -48,7 +52,9 @@
         (dndMoved)="todoMoved(todo, inProgress)"
         [dndDraggable]
         [dndDragDisabled]="isMobile"
-        [dndObject]="todo">{{todo.title}}</div>
+        [dndObject]="todo">
+          <a>{{todo.title}}</a>
+        </div>
     </div>
     <div class="flex-25 completed"
       [dndList]
@@ -63,7 +69,9 @@
         (dndMoved)="todoMoved(todo, completed)"
         [dndDraggable]
         [dndDragDisabled]="isMobile"
-        [dndObject]="todo">{{todo.title}}</div>
+        [dndObject]="todo">
+          <a>{{todo.title}}</a>
+        </div>
     </div>
   </div>
 </div>

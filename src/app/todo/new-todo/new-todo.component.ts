@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 import { TodoService } from '../../services/todo.service';
+import { Todo } from '../../shared/class/todo';
 
 @Component({
   selector: 'app-new-todo',
@@ -9,10 +10,10 @@ import { TodoService } from '../../services/todo.service';
   styleUrls: ['./new-todo.component.scss']
 })
 export class NewTodoComponent implements OnInit {
-  todo = {
+  todo: Todo = {
     title: '',
     description: '',
-    deadline: new Date,
+    deadline: new Date(),
     status: 'backlog'
   }
 
@@ -34,6 +35,12 @@ export class NewTodoComponent implements OnInit {
   }
 
   create() {
+    const todo = {
+      ...this.todo
+    }
+
+    todo.deadline = this.todo.deadline.getTime()
+ 
     this.todoService.create(this.todo, this.images)
       .then(() => this.toast.success('', 'Created'))
       .catch(({ ref }) => {
