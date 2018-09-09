@@ -1,0 +1,70 @@
+<div class="new-todo-container layout layout-align-center">
+  <form class="layout-column new-todo-form" (ngSubmit)="update()">
+    <h1 class="new-todo-form__title">New todo</h1>
+  
+    <mat-form-field>
+      <input matInput placeholder="Title" type="text" required
+        [(ngModel)]="todo.title" name="title">
+    </mat-form-field>
+
+    <mat-form-field >
+      <textarea matInput placeholder="Description"
+        [(ngModel)]="todo.description"
+        name="description">
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field >
+      <input matInput [matDatepicker]="picker" placeholder="Deadline" [(ngModel)]="todo.deadline" name="deadline">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [(ngModel)]="todo.status" name="status" placeholder="Status">
+        <mat-option *ngFor="let status of statuses" [value]="status.value">
+          {{status.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button color="primary" class="new-todo-form__img-upload" (click)="openBrowser($event)">
+        Add Image
+      </button>
+
+      <input id="fileInput" hidden type="file" (change)="fileChange($event.target.files)" multiple accept="image/*">
+    </div>
+
+    <div class="todo-images" *ngIf="images.length">
+      <div class="todo-image-small" (click)="showFull(image)" *ngFor="let image of images; let i = index" [style.backgroundImage]="'url(' + image + ')'">
+        <mat-icon class="todo-image-small__delete" (click)="deleteImage(image)">delete_forever</mat-icon>
+      </div>
+      <div class="todo-fullscreen-image-modal" *ngIf="isFullScreen">
+        <div class="todo-fullscreen-container">
+          <span class="todo-fullscreen-container__prev-btn" (click)="prevImage()">
+            <
+          </span>
+          <img class="todo-fullscreen-container__image" src="{{fullScreenImage}}" alt="Full screen image">
+          <span class="todo-fullscreen-container__close-btn" (click)="closeFullScreen()">X</span>
+          <span class="todo-fullscreen-container__next-btn" (click)="nextImage()">
+            >
+          </span>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="todo-images layout-column" *ngIf="imagesPreUpload.length">
+      <p class="todo-images__title">New Images</p>
+      <div class="layout">
+        <div class="todo-image-small" *ngFor="let image of imagesPreUpload" [style.backgroundImage]="'url(' + image.src + ')'">
+          <mat-icon class="todo-image-small__delete" (click)="deleteNewImage(image.index)">delete_forever</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" class="new-todo-form__create">Save</button>
+  </form>
+</div>
+  

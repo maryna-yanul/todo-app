@@ -12,7 +12,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { SignModule } from './sign/sign.module';
 import { TodoModule } from './todo/todo.module';
-import { SignService } from './services/firebase/sign.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { SignService } from './services/firebase/sign.service';
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
   constructor() {
     firebase.initializeApp(config);

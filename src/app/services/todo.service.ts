@@ -64,10 +64,21 @@ export class TodoService {
     return { backlog, inProgress, todos, completed };
   }
 
-  update(id = '', values = {}) {
-    const { uid } = this.auth.user
-    const userTodoPath = `todo/${uid}/${id}`
+  async update(id = '', { todo, images } = { todo: { images: [] }, images: [] }) {
+    const { uid } = this.auth.user;
+    const userTodoPath = `todo/${uid}/${id}`;
+    const urls = images.length && (await this.storage.uploadImages(images)) || []
+    todo.images = [...(todo.images || []), ...urls]
 
-    return this.database.update(userTodoPath, values)
+    return this.database.update(userTodoPath, todo);
+  }
+
+  async getTodo(id) {
+    const { uid } = this.auth.user;
+    const path = `todo/${uid}/${id}`;
+    const ref = this.database.default.ref(path);
+    const todo = (await ref.once('value')).val();
+
+    return todo;
   }
 }
