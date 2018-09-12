@@ -33,6 +33,7 @@ import { TodoModule } from './todo/todo.module';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor() {
     firebase.initializeApp(config);

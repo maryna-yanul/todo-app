@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
     title: '',
     description: '',
     deadline: new Date,
-    status: 'backlog',
+    status: '',
     id: ''
   };
 
