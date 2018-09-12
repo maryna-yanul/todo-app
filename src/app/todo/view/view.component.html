@@ -1,0 +1,36 @@
+<div class="layout layout-align-center">
+  <div class="todo-view layout-column layout-align-space-between">
+    <div class="layout-column">
+      <a class="back-to-list" routerLink="/todo/list">
+        <
+      </a>
+      <div class="layout layout-align-space-between-end">
+        <span  class="todo-title">{{todo.title}}</span>
+        <span class="todo-status {{statusCss}}">{{todo.status}}</span>
+      </div>
+      <p class="todo-deadline">Deadline: <span class="todo-deadline__date">{{deadline}}</span></p>
+      <p class="todo-description"><span class="todo-description__title">Description:</span> {{todo.description}}</p>
+      <div class="todo-images" *ngIf="images.length">
+        <div class="todo-image-small" (click)="showFull(image)" *ngFor="let image of images; let i = index" [style.backgroundImage]="'url(' + image + ')'"></div>
+        <div class="todo-fullscreen-image-modal" *ngIf="isFullScreen">
+          <div class="todo-fullscreen-container">
+            <span class="todo-fullscreen-container__prev-btn" (click)="prevImage()">
+              <
+            </span>
+            <img class="todo-fullscreen-container__image" src="{{fullScreenImage}}" alt="Full screen image">
+            <span class="todo-fullscreen-container__close-btn" (click)="closeFullScreen()">X</span>
+            <span class="todo-fullscreen-container__next-btn" (click)="nextImage()">
+              >
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="layout layout-align-end todo-edit">
+      <a routerLink="/todo/edit/{{todo.id}}">
+        <button mat-raised-button color="primary">Edit</button>
+      </a>
+    </div>
+  </div>
+</div>

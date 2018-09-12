@@ -16,6 +16,7 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { ViewComponent } from './view/view.component';
 
 const materialModules = [
   MatFormFieldModule,
@@ -38,7 +39,8 @@ const materialModules = [
   declarations: [
     NewTodoComponent,
     ListComponent,
-    EditComponent
+    EditComponent,
+    ViewComponent
   ]
 })
 export class TodoModule { }

@@ -16,7 +16,7 @@
         [dndDraggable]
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
-          <a>{{todo.title}}</a>
+          <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
         </div>
     </div>
     <div class="flex-25 todos"
@@ -26,15 +26,16 @@
       <div class="todos__title">
         Todo
       </div>
+      <!-- TODO: rename todos__todo-conteiner and make <a /> biggest -->
       <div *ngFor="let todo of todos"
-        class="todos__todo-conteiner"
+        class="todos__todo-conteiner" 
         [dndType]="'todo'"
         (dndMoved)="todoMoved(todo, todos)"
         (dndCopied)="moved($event)"
         [dndDraggable]
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
-          <a>{{todo.title}}</a>
+          <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
         </div>
     </div>
   </div>
@@ -53,7 +54,7 @@
         [dndDraggable]
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
-          <a>{{todo.title}}</a>
+          <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
         </div>
     </div>
     <div class="flex-25 completed"
@@ -70,7 +71,7 @@
         [dndDraggable]
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
-          <a>{{todo.title}}</a>
+          <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
         </div>
     </div>
   </div>

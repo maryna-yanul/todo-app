@@ -38,10 +38,13 @@ h4 {
 .in-progress__title,
 .todos__title,
 .completed__title {
-  padding: 10px;
   font-family: $font;
+  padding: 10px 20px;
   font-weight: 900;
   font-size: 18px;
+  margin-left: -5px;
+  margin-right: -5px;
+  border-bottom: 2px solid #ACADBC;
 }
 
 
