@@ -64,7 +64,7 @@ export class TodoService {
     return { backlog, inProgress, todos, completed };
   }
 
-  async update(id = '', { todo, images } = { todo: { images: [] }, images: [] }) {
+  async update(id = '', { todo, images }) {
     const { uid } = this.auth.user;
     const userTodoPath = `todo/${uid}/${id}`;
     const urls = images.length && (await this.storage.uploadImages(images)) || []

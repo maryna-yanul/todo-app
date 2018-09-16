@@ -83,6 +83,7 @@ export class EditComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = event => {
+        // @ts-ignore
         resolve({ src: event.target.result, index });
       };
 

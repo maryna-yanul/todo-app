@@ -39,7 +39,7 @@ export class NewTodoComponent implements OnInit {
       ...this.todo
     }
 
-    todo.deadline = this.todo.deadline.getTime()
+    todo.deadline = typeof this.todo.deadline === 'number' ? this.todo.deadline : this.todo.deadline.getTime()
  
     this.todoService.create(this.todo, this.images)
       .then(() => this.toast.success('', 'Created'))

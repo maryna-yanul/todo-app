@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
+import { DatabaseService } from '../../services/firebase/database.service';
 
 @Component({
   selector: 'app-list',
@@ -22,7 +23,8 @@ export class ListComponent implements OnInit {
   isMobile = false
 
   constructor(
-    private todoService: TodoService
+    private todoService: TodoService,
+    private database: DatabaseService
   ) {
   }
 
@@ -63,7 +65,7 @@ export class ListComponent implements OnInit {
     const type = this.newType(status);
 
     if (type) {
-      await this.todoService.update(id, { status: type });
+      await this.database.update(id, { status: type });
     }
 
     Object.assign(this, await this.todoService.getAllTodo());

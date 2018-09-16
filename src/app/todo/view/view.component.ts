@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+// @ts-ignore
 import moment from 'moment';
 
 import { TodoService } from '../../services/todo.service';
