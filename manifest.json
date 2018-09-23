@@ -5,7 +5,7 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/todo-app",
-  "start_url": "/todo-app",
+  "start_url": "/todo-app/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
