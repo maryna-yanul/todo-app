@@ -1,0 +1,18 @@
+@import "./material-varaibles.scss";
+@import "./mixin";
+@import "./typography.scss";
+@import "./layout";
+@import "./varaibles";
+
+body {
+  background-color: #ACADBC;
+  font-family: $font;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
