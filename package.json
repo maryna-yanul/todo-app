@@ -7,7 +7,8 @@
     "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "node ./e2e/puppeteer/index.js"
+    "e2e": "node ./e2e/index.js",
+    "deploy": "firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "@angular/service-worker": "^6.0.3",
     "core-js": "^2.5.4",
     "firebase": "^5.4.0",
+    "http-server": "^0.11.1",
     "moment": "^2.22.2",
     "ngx-drag-and-drop-lists": "1.1.3",
     "ngx-toastr": "^9.0.2",
@@ -43,6 +45,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "firebase-tools": "^4.2.1",
     "puppeteer": "^1.7.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
