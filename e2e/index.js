@@ -13,7 +13,7 @@ const config = require('./config');
   page.click('.sign-in__submit-btn')
 
   navigationPromise
-    .then((...data) => {
+    .then(() => {
       browser.close()
     })
 })();

@@ -19,7 +19,7 @@ import { TodoModule } from './todo/todo.module';
   ],
   imports: [
     BrowserModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AppRoutingModule,
     SignModule,
     TodoModule,
