@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InComponent } from './in/in.component';
 import { UpComponent } from './up/up.component';
 import { MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
-import { FormsModule  }   from '@angular/forms';
+import { FormsModule  } from '@angular/forms';
 
 @NgModule({
   imports: [

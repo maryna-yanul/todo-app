@@ -16,7 +16,7 @@ export class FetchUserGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise((resolve, reject) => {
-      this.auth.default().onAuthStateChanged(user => resolve(Boolean(user)))
-    })
+      this.auth.default().onAuthStateChanged(user => resolve(Boolean(user)));
+    });
   }
 }

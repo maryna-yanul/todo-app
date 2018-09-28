@@ -1,5 +1,5 @@
 {
-  "index": "https://dmytropanontko.github.io/todo-app/index.html",
+  "index": "./index.html",
   "assetGroups": [{
     "name": "app",
     "installMode": "prefetch",

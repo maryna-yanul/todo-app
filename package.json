@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "node ./e2e/puppeteer/index.js",
     "postinstall": "ng build --prod"
   },
   "private": true,
