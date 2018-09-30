@@ -1,1 +1,6 @@
+<header class="app-header">
+  
+  <a class="app-header__main-page" routerLink="/">List</a>
+  <i *ngIf="hasUser" (click)="signOut()" class="sign-out material-icons">exit_to_app</i>
+</header>
 <router-outlet></router-outlet>

@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 const config = require('./config');
 const { delay } = require('./util')
 
-describe('Sign', () => {
+describe('Sign', function () {
+  this.timeout(120000)
   let browser = null;
   let page = null;
 
@@ -13,7 +14,7 @@ describe('Sign', () => {
 
     await delay(5000)
 
-    done()
+    return Promise.resolve()
   })
 
   it('Sign in', async done => {

@@ -53,21 +53,26 @@ export class ListComponent implements OnInit {
         return status;
       }
     }
-    
+
     return '';
   }
 
   async todoMoved(todo: any, list: any[]) {
     const { id, status } = todo;
-    
+
     list.splice(list.indexOf(todo), 1);
-    
+
     const type = this.newType(status);
 
     if (type) {
-      await this.database.update(id, { status: type });
+      await this.todoService.changeStatus(id, type);
     }
 
+    Object.assign(this, await this.todoService.getAllTodo());
+  }
+
+  async deleteTodo(id) {
+    await this.todoService.delete(id);
     Object.assign(this, await this.todoService.getAllTodo());
   }
 }

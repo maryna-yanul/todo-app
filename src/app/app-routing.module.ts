@@ -1,4 +1,4 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UpComponent } from './sign/up/up.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'sign/up', component: UpComponent },
   { path: 'sign/in', component: InComponent },
   { path: 'todo/new', component: NewTodoComponent, canActivate: [FetchUserGuard] },
-  { path: 'todo/list', component: ListComponent, canActivate: [FetchUserGuard] },
+  { path: '', component: ListComponent, canActivate: [FetchUserGuard] },
   { path: 'todo/edit/:id', component: EditComponent, canActivate: [FetchUserGuard] },
   { path: 'todo/view/:id', component: ViewComponent, canActivate: [FetchUserGuard] }
 ];

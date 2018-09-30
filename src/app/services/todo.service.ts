@@ -17,43 +17,43 @@ export class TodoService {
   }
 
   create(todo, todoImages) {
-    const { uid } = this.auth.user
-    const userTodoPath = `todo/${uid}`
+    const { uid } = this.auth.user;
+    const userTodoPath = `todo/${uid}`;
 
     return this.database.createWithId(userTodoPath, todo)
       .then(async ref => {
         try {
-          const urls = await this.storage.uploadImages(todoImages)
+          const urls = await this.storage.uploadImages(todoImages);
 
-          ref.update({ images: urls })
-        } catch(err) {
-          return { err, ref }
+          ref.update({ images: urls });
+        } catch (err) {
+          return { err, ref };
         }
-      })
+      });
   }
 
   getTodoByStatus(status) {
-    const { uid } = this.auth.user
-    const userTodoPath = `todo/${uid}`
+    const { uid } = this.auth.user;
+    const userTodoPath = `todo/${uid}`;
 
-    return this.database.getDataByKeyAndValue(userTodoPath, 'status', status)
+    return this.database.getDataByKeyAndValue(userTodoPath, 'status', status);
   }
 
   getBacklogTodo() {
-    return this.getTodoByStatus('backlog')
+    return this.getTodoByStatus('backlog');
   }
 
   getInProgressTodo() {
-    return this.getTodoByStatus('in_progress')    
+    return this.getTodoByStatus('in_progress');
   }
 
   getTodoTodo() {
-    return this.getTodoByStatus('todo')    
+    return this.getTodoByStatus('todo');
   }
 
   getCompletedTodo() {
-    return this.getTodoByStatus('completed')    
-  } 
+    return this.getTodoByStatus('completed');
+  }
 
   async getAllTodo() {
     const backlog = Object.values(((await this.getBacklogTodo().once('value')).val()) || {});
@@ -67,8 +67,8 @@ export class TodoService {
   async update(id = '', { todo, images }) {
     const { uid } = this.auth.user;
     const userTodoPath = `todo/${uid}/${id}`;
-    const urls = images.length && (await this.storage.uploadImages(images)) || []
-    todo.images = [...(todo.images || []), ...urls]
+    const urls = images.length && (await this.storage.uploadImages(images)) || [];
+    todo.images = [...(todo.images || []), ...urls];
 
     return this.database.update(userTodoPath, todo);
   }
@@ -80,5 +80,17 @@ export class TodoService {
     const todo = (await ref.once('value')).val();
 
     return todo;
+  }
+
+  delete(id) {
+    const { uid } = this.auth.user;
+
+    return this.database.delete(`todo/${uid}/${id}`);
+  }
+
+  changeStatus(id, status) {
+    const { uid } = this.auth.user;
+
+    return this.database.update(`todo/${uid}/${id}`, { status });
   }
 }

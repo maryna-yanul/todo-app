@@ -17,6 +17,7 @@
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
           <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
+          <i (click)="deleteTodo(todo.id)" class="todo-delete material-icons">delete_forever</i>
         </div>
     </div>
     <div class="flex-25 todos"
@@ -36,6 +37,7 @@
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
           <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
+          <i (click)="deleteTodo(todo.id)" class="todo-delete material-icons">delete_forever</i>
         </div>
     </div>
   </div>
@@ -55,6 +57,7 @@
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
           <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
+          <i (click)="deleteTodo(todo.id)" class="todo-delete material-icons">delete_forever</i>
         </div>
     </div>
     <div class="flex-25 completed"
@@ -72,7 +75,11 @@
         [dndDragDisabled]="isMobile"
         [dndObject]="todo">
           <a routerLink="/todo/view/{{todo.id}}">{{todo.title}}</a>
+          <i (click)="deleteTodo(todo.id)" class="todo-delete material-icons">delete_forever</i>
         </div>
     </div>
   </div>
+  <a routerLink="/todo/new">
+    <i class="new-todo material-icons">add_circle</i>
+  </a>
 </div>
