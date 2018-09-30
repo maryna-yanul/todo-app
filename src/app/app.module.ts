@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as firebase from 'firebase';
 import { ToastrModule } from 'ngx-toastr';
 
-import { config } from '../environments/database'
+import { config } from '../environments/database';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';

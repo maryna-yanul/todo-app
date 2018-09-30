@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { database } from 'firebase'
+import { database } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  default = database()
+  default = database();
 
   constructor() {
   }
@@ -29,7 +29,7 @@ export class DatabaseService {
     const id = todo.key;
     todo.update({ id });
 
-    return todo
+    return todo;
   }
 
   delete(path) {
@@ -41,6 +41,6 @@ export class DatabaseService {
   }
 
   update(path, values) {
-    return this.default.ref(path).update(values)
+    return this.default.ref(path).update(values);
   }
 }

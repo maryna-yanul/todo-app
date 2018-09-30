@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SignService } from '../services/firebase/sign.service';
 
@@ -8,7 +8,8 @@ import { SignService } from '../services/firebase/sign.service';
 })
 export class FetchUserGuard implements CanActivate {
   constructor(
-    private auth: SignService
+    private auth: SignService,
+    private router: Router
   ) {
 
   }
@@ -16,7 +17,15 @@ export class FetchUserGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise((resolve, reject) => {
-      this.auth.default().onAuthStateChanged(user => resolve(Boolean(user)));
+      this.auth.default().onAuthStateChanged(user => {
+        const hasUser = Boolean(user);
+        if (hasUser) {
+          resolve(hasUser);
+        } else {
+          this.router.navigate(['/sign/in']);
+          reject(hasUser);
+        }
+      });
     });
   }
 }
