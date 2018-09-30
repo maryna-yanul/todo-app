@@ -1,27 +1,35 @@
 const puppeteer = require('puppeteer');
 const config = require('./config');
+const { delay } = require('./util')
 
-function delay(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
+describe('Sign', () => {
+  let browser = null;
+  let page = null;
 
-(async () => {
-  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-  const page = await browser.newPage();
-  await page.goto(config.url);
-  await delay(4000)
-  await page.goto(`${config.url}/sign/in`);
-  await page.waitFor('input[name="email"]');
+  before(async done => {
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    page = await browser.newPage();
+    await page.goto(config.url);
 
-  await page.type('input[name="email"]', config.user.email);
-  await page.type('input[name="password"]', config.user.password);
-  const navigationPromise = page.waitForNavigation();
-  page.click('.sign-in__submit-btn')
+    await delay(5000)
 
-  navigationPromise
-    .then(() => {
-      browser.close()
-    })
-})();
+    done()
+  })
+
+  it('Sign in', async done => {
+    await page.goto(`${config.url}/sign/in`);
+    await page.waitFor('input[name="email"]');
+  
+    await page.type('input[name="email"]', config.user.email);
+    await page.type('input[name="password"]', config.user.password);
+    const navigationPromise = page.waitForNavigation();
+    page.click('.sign-in__submit-btn')
+  
+    navigationPromise
+      .then(() => {
+        done()
+      })
+  })
+
+  after(() => browser.close())
+})

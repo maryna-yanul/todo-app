@@ -46,3 +46,4 @@ start.sh
 
 # CI
 
+/package-lock.json
