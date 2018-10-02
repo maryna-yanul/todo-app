@@ -79,8 +79,7 @@
   max-width: 75vw;
 }
 
-.todo-fullscreen-container__prev-btn,
-.todo-fullscreen-container__next-btn {
+.todo-fullscreen-container__btn {
   font-size: 30px;
   font-weight: 900;
   position: absolute;
@@ -93,17 +92,17 @@
   }
 }
 
-.todo-fullscreen-container__prev-btn {
+.todo-fullscreen-container__btn--next {
   transform: translate(-150%, -60%);
   left: 0;
 }
 
-.todo-fullscreen-container__next-btn {
+.todo-fullscreen-container__btn--next {
   transform: translate(150%, -60%);
   right: 0;
 }
 
-.todo-fullscreen-container__close-btn {
+.todo-fullscreen-container__btn--close {
   position: absolute;
   top: 0;
   font-size: 18px;

@@ -42,12 +42,12 @@
       </div>
       <div class="todo-fullscreen-image-modal" *ngIf="isFullScreen">
         <div class="todo-fullscreen-container">
-          <span class="todo-fullscreen-container__prev-btn" (click)="prevImage()">
+          <span class="todo-fullscreen-container__btn todo-fullscreen-container__btn--prev" (click)="prevImage()">
             <
           </span>
           <img class="todo-fullscreen-container__image" src="{{fullScreenImage}}" alt="Full screen image">
-          <span class="todo-fullscreen-container__close-btn" (click)="closeFullScreen()">X</span>
-          <span class="todo-fullscreen-container__next-btn" (click)="nextImage()">
+          <span class="todo-fullscreen-container__btn todo-fullscreen-container__btn--close" (click)="closeFullScreen()">X</span>
+          <span class="todo-fullscreen-container__btn todo-fullscreen-container__btn--next" (click)="nextImage()">
             >
           </span>
         </div>

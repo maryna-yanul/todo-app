@@ -10,7 +10,7 @@
         Backlog
       </div>
       <div *ngFor="let todo of backlog"
-        class="backlog__todo-conteiner"
+        class="todo-conteiner"
         [dndType]="'todo'"
         (dndMoved)="todoMoved(todo, backlog)"
         [dndDraggable]
@@ -28,7 +28,7 @@
       </div>
       <!-- TODO: rename todos__todo-conteiner and make <a /> biggest -->
       <div *ngFor="let todo of todos"
-        class="todos__todo-conteiner" 
+        class="todo-conteiner" 
         [dndType]="'todo'"
         (dndMoved)="todoMoved(todo, todos)"
         (dndCopied)="moved($event)"
@@ -48,7 +48,7 @@
         In Progress
       </div>
       <div *ngFor="let todo of inProgress"
-        class="in-progress__todo-conteiner"
+        class="todo-conteiner"
         [dndType]="'todo'"
         (dndMoved)="todoMoved(todo, inProgress)"
         [dndDraggable]
@@ -65,7 +65,7 @@
         Completed
       </div>
       <div *ngFor="let todo of completed"
-        class="completed__todo-conteiner"
+        class="todo-conteiner"
         [dndType]="'todo'"
         (dndMoved)="todoMoved(todo, completed)"
         [dndDraggable]

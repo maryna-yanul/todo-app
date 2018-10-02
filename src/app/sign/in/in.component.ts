@@ -27,7 +27,7 @@ export class InComponent implements OnInit {
 
   signIn() {
     this.sign.in(this.user)
-      .then(() => this.route.navigateByUrl('todo/list'))
+      .then(() => this.route.navigateByUrl('/'))
       .catch(err => this.toast.error(err.message, 'Error', { disableTimeOut: true }));
   }
 }
