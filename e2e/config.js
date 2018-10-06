@@ -3,5 +3,9 @@ module.exports = {
   user: {
     email: 'dmytro.panontko@keenethics.com',
     password: '12345678'
+  },
+  todo: {
+    title: `test:${Date.now()}`,
+    description: 'Description'
   }
 }
