@@ -18,9 +18,9 @@ export class ListComponent implements OnInit {
     in_progress: 0,
     todo: 0,
     completed: 0
-  }
+  };
 
-  isMobile = false
+  isMobile = false;
 
   constructor(
     private todoService: TodoService,
@@ -29,9 +29,9 @@ export class ListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.isMobile = document.body.offsetWidth < 768
+    this.isMobile = document.body.offsetWidth < 768;
 
-    Object.assign(this, await this.todoService.getAllTodo())
+    Object.assign(this, await this.todoService.getAllTodo());
 
     this.state.backlog = this.backlog.length;
     this.state.in_progress = this.inProgress.length;
@@ -47,7 +47,7 @@ export class ListComponent implements OnInit {
       completed: this.completed.length
     };
 
-    for(const status in newState) {
+    for (const status in newState) {
       if (status !== currentStatus && newState[status] !== this.state[status]) {
         this.state = newState;
         return status;

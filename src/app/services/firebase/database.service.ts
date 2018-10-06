@@ -24,7 +24,7 @@ export class DatabaseService {
   }
 
   async createWithId(name, value) {
-    const ref = this.default.ref(name)
+    const ref = this.default.ref(name);
     const todo = await ref.push(value);
     const id = todo.key;
     todo.update({ id });
