@@ -23,7 +23,7 @@ export class SignService {
         currentUser.updateProfile({
           displayName: userInfo.name,
           photoURL: null // TODO: implemented photo for user
-        })
+        });
       });
   }
 

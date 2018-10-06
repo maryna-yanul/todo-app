@@ -20,7 +20,7 @@ export class ViewComponent implements OnInit {
     id: ''
   };
 
-  images: string[] = []
+  images: string[] = [];
 
   isFullScreen = false;
   fullScreenImage = '';
@@ -37,12 +37,12 @@ export class ViewComponent implements OnInit {
     this.todoService.getTodo(id)
       .then(todo => {
         this.todo = todo;
-        this.todo.deadline = new Date(this.todo.deadline)
+        this.todo.deadline = new Date(this.todo.deadline);
         // TODO: use directive
-        this.statusCss = this.todo.status
-        this.todo.status = this.todo.status.replace(/_/g, ' ')
-        this.images = this.todo.images || []
-        this.deadline = moment(this.todo.deadline).format('DD MMM YYYY')
+        this.statusCss = this.todo.status;
+        this.todo.status = this.todo.status.replace(/_/g, ' ');
+        this.images = this.todo.images || [];
+        this.deadline = moment(this.todo.deadline).format('DD MMM YYYY');
       });
   }
 
@@ -50,30 +50,30 @@ export class ViewComponent implements OnInit {
   }
 
   toggleFullScreen() {
-    this.isFullScreen = !this.isFullScreen
+    this.isFullScreen = !this.isFullScreen;
   }
 
   showFull(image) {
-    this.fullScreenImage = image
-    this.toggleFullScreen()
+    this.fullScreenImage = image;
+    this.toggleFullScreen();
   }
 
   closeFullScreen() {
-    this.fullScreenImage = ''
-    this.toggleFullScreen()
+    this.fullScreenImage = '';
+    this.toggleFullScreen();
   }
 
   prevImage() {
-    const currentIndex = this.images.indexOf(this.fullScreenImage)
-    const nextIndex = currentIndex > 0 ? currentIndex - 1 : 0
+    const currentIndex = this.images.indexOf(this.fullScreenImage);
+    const nextIndex = currentIndex > 0 ? currentIndex - 1 : 0;
 
-    this.fullScreenImage = this.images[nextIndex]
+    this.fullScreenImage = this.images[nextIndex];
   }
 
   nextImage() {
-    const currentIndex = this.images.indexOf(this.fullScreenImage)
-    const nextIndex = currentIndex < this.images.length - 1 ? currentIndex + 1 : currentIndex
+    const currentIndex = this.images.indexOf(this.fullScreenImage);
+    const nextIndex = currentIndex < this.images.length - 1 ? currentIndex + 1 : currentIndex;
 
-    this.fullScreenImage = this.images[nextIndex]
+    this.fullScreenImage = this.images[nextIndex];
   }
 }

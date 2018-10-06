@@ -15,16 +15,16 @@ export class NewTodoComponent implements OnInit {
     description: '',
     deadline: new Date(),
     status: 'backlog'
-  }
+  };
 
   statuses = [
     { value: 'backlog', text: 'Backlog'},
     { value: 'todo', text: 'Todo'},
     { value: 'in_progress', text: 'In Progress'},
     { value: 'completed', text: 'Completed'}
-  ]
+  ];
 
-  images
+  images;
 
   constructor(
     private todoService: TodoService,
@@ -37,23 +37,23 @@ export class NewTodoComponent implements OnInit {
   create() {
     const todo = {
       ...this.todo
-    }
+    };
 
-    todo.deadline = typeof this.todo.deadline === 'number' ? this.todo.deadline : this.todo.deadline.getTime()
- 
+    todo.deadline = typeof this.todo.deadline === 'number' ? this.todo.deadline : this.todo.deadline.getTime();
+
     this.todoService.create(this.todo, this.images)
       .then(() => this.toast.success('', 'Created'))
       .catch(({ ref }) => {
-        this.toast.error('Something went wrong', 'Error')
+        this.toast.error('Something went wrong', 'Error');
 
-        ref.put(null)
-      })
+        ref.put(null);
+      });
   }
 
-  openBrowser(event){
-    event.preventDefault()
+  openBrowser(event) {
+    event.preventDefault();
 
-    document.getElementById("fileInput").click();
+    document.getElementById('fileInput').click();
   }
 
   fileChange(images: File[]) {

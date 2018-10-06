@@ -4,5 +4,5 @@ export class Todo {
   description: string;
   deadline: any;
   status: string;
-  images?: string[]
+  images?: string[];
 }

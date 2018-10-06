@@ -22,6 +22,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn lint
       - run: yarn build
       - run:
           command: ./node_modules/.bin/http-server ./dist/todoApp -p 4200
