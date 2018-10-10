@@ -1,6 +1,6 @@
-<div class="new-todo-container layout layout-align-center">
-  <form class="layout-column new-todo-form" (ngSubmit)="update()">
-    <h1 class="new-todo-form__title">New todo</h1>
+<div class="edit-page layout layout-align-center">
+  <form class="layout-column todo-form edit-page__form" (ngSubmit)="update()">
+    <h1 class="todo-form__title-primary">Edit todo</h1>
   
     <mat-form-field>
       <input matInput placeholder="Title" type="text" required
@@ -28,26 +28,26 @@
       </mat-select>
     </mat-form-field>
 
-    <div>
-      <button mat-raised-button color="primary" class="new-todo-form__img-upload" (click)="openBrowser($event)">
+    <div class="todo-form__img-upload">
+      <button mat-raised-button color="primary" class="todo-form__upload-btn todo-form__upload-btn_position" (click)="openBrowser($event)">
         Add Image
       </button>
 
       <input id="fileInput" hidden type="file" (change)="fileChange($event.target.files)" multiple accept="image/*">
     </div>
 
-    <div class="todo-images" *ngIf="images.length">
-      <div class="todo-image-small" (click)="showFull(image)" *ngFor="let image of images; let i = index" [style.backgroundImage]="'url(' + image + ')'">
-        <mat-icon class="todo-image-small__delete" (click)="deleteImage(image)">delete_forever</mat-icon>
+    <div class="todo-form__images galary" *ngIf="images.length">
+      <div class="galary__preview-image" (click)="showFull(image)" *ngFor="let image of images; let i = index" [style.backgroundImage]="'url(' + image + ')'">
+        <mat-icon class="galary__delete-icon" (click)="deleteImage(image)">delete_forever</mat-icon>
       </div>
-      <div class="todo-fullscreen-image-modal" *ngIf="isFullScreen">
-        <div class="todo-fullscreen-container">
-          <span class="todo-fullscreen-container__btn todo-fullscreen-container__btn--prev" (click)="prevImage()">
+      <div class="galary__modal modal-background" *ngIf="isFullScreen">
+        <div class="modal-background__container">
+          <span class="modal-background__navigation-previus-btn modal-background__navigation-previus-btn_left-center" (click)="prevImage()">
             <
           </span>
-          <img class="todo-fullscreen-container__image" src="{{fullScreenImage}}" alt="Full screen image">
-          <span class="todo-fullscreen-container__btn todo-fullscreen-container__btn--close" (click)="closeFullScreen()">X</span>
-          <span class="todo-fullscreen-container__btn todo-fullscreen-container__btn--next" (click)="nextImage()">
+          <img class="modal-background__content" src="{{fullScreenImage}}" alt="Full screen image">
+          <span class="modal-background__close-btn modal-background__close-btn_top-right" (click)="closeFullScreen()">X</span>
+          <span class="modal-background__navigation-next-btn modal-background__navigation-next-btn_center-right" (click)="nextImage()">
             >
           </span>
         </div>
@@ -55,15 +55,15 @@
       </div>
     </div>
 
-    <div class="todo-images layout-column" *ngIf="imagesPreUpload.length">
-      <p class="todo-images__title">New Images</p>
+    <div class="images-new layout-column" *ngIf="imagesPreUpload.length">
+      <p class="images-new__title">New Images</p>
       <div class="layout">
-        <div class="todo-image-small" *ngFor="let image of imagesPreUpload" [style.backgroundImage]="'url(' + image.src + ')'">
-          <mat-icon class="todo-image-small__delete" (click)="deleteNewImage(image.index)">delete_forever</mat-icon>
+        <div class="images-new__item" *ngFor="let image of imagesPreUpload" [style.backgroundImage]="'url(' + image.src + ')'">
+          <mat-icon class="images-new__delete-icon" (click)="deleteNewImage(image.index)">delete_forever</mat-icon>
         </div>
       </div>
     </div>
 
-    <button mat-raised-button color="primary" type="submit" class="new-todo-form__create">Save</button>
+    <button mat-raised-button color="primary" type="submit" class="todo-form__save-btn">Save</button>
   </form>
 </div>
