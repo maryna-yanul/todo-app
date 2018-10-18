@@ -43,4 +43,6 @@ const materialModules = [
     ViewComponent
   ]
 })
-export class TodoModule { }
+export class TodoModule {
+  constructor() { }
+}

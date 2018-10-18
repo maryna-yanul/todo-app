@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { auth } from 'firebase';
 import { User } from '../../shared/class/user';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,13 @@ export class SignService {
   default = auth;
   user;
 
-  constructor() {
+  constructor(
+    private notification: NotificationService
+  ) {
     this.default().onAuthStateChanged(user => {
+      console.log('check: ', user);
+      this.notification.initialize();
+
       this.user = user;
     });
   }
