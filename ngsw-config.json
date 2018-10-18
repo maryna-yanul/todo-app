@@ -11,13 +11,16 @@
         "/*.js"
       ]
     }
-  }, {
+  },{
     "name": "assets",
     "installMode": "lazy",
     "updateMode": "prefetch",
     "resources": {
       "files": [
         "/assets/**"
+      ],
+      "urls": [
+        "https://fonts.googleapis.com/**"
       ]
     }
   }]
