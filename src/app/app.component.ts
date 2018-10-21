@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(
     private sign: SignService
   ) {
-    this.hasUser = Boolean(this.sign.user);
+    this.sign.default().onAuthStateChanged(user => this.hasUser = Boolean(user));
   }
 
   signOut() {

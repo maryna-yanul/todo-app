@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { of } from 'rxjs/observable/of';
+import { Subscription } from 'rxjs';
+import 'rxjs/add/operator/scan';
+import 'rxjs/add/operator/distinct';
+import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/last';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../shared/class/todo';
@@ -33,6 +43,8 @@ export class EditComponent implements OnInit {
   isFullScreen = false;
   fullScreenImage = '';
 
+  fileObserver: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private todoService: TodoService,
@@ -48,33 +60,42 @@ export class EditComponent implements OnInit {
     this.images = this.todo.images || [];
   }
 
-  update() {
-    this.todoService.update(this.todo.id, { todo: this.todo, images: this.newImages })
-      .then(() => this.toast.success('', 'Updated'))
-      .catch(err => {
-        console.error(err);
-        this.toast.error('Something went wrong', 'Error');
+  ngAfterViewInit() {
+    const inputFile = document.querySelector('#fileInput');
+
+    this.fileObserver = fromEvent(inputFile, 'change')
+      .pluck('target')
+      .pluck('files')
+      .map((files: any) => files[files.length - 1])
+      .distinct()
+      .mergeMap(image => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = event => {
+          // @ts-ignore
+          resolve({ src: event.target.result });
+        };
+
+        reader.onerror = error => {
+          reject(error);
+        };
+
+        reader.readAsDataURL(image);
+      }))
+      .scan((images: any[] = [], image: any) => [...images, image], [])
+      .subscribe((images: any[]) => {
+        this.imagesPreUpload = images;
       });
   }
 
-  openBrowser(event) {
-    event.preventDefault();
-
-    document.getElementById('fileInput').click();
-  }
-
-  fileChange(images: File[]) {
-    if (images.length > 0) {
-      this.newImages = [...new Set([...this.newImages, ...images])];
-
-      this.preImagesView(this.newImages);
-    }
+  ngOnDestroy() {
+    this.fileObserver.unsubscribe();
   }
 
   preImagesView(images) {
     Promise.all(images.map(this.getImageSrc))
-      .then(img => {
-        this.imagesPreUpload = img;
+      .then(imgs => {
+        this.imagesPreUpload = imgs;
       });
   }
 
@@ -93,6 +114,21 @@ export class EditComponent implements OnInit {
 
       reader.readAsDataURL(image);
     });
+  }
+
+  update() {
+    this.todoService.update(this.todo.id, { todo: this.todo, images: this.newImages })
+      .then(() => this.toast.success('', 'Updated'))
+      .catch(err => {
+        console.error(err);
+        this.toast.error('Something went wrong', 'Error');
+      });
+  }
+
+  openBrowser(event) {
+    event.preventDefault();
+
+    document.getElementById('fileInput').click();
   }
 
   toggleFullScreen() {

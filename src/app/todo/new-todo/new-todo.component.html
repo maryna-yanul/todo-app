@@ -1,9 +1,9 @@
 <div class="new-todo-container layout layout-align-center">
-  <form class="layout-column new-todo-form" (ngSubmit)="create()">
+  <form class="layout-column new-todo-form" id="create-btn">
     <h1 class="new-todo-form__title">New todo</h1>
   
     <mat-form-field>
-      <input matInput placeholder="Title" type="text" required
+      <input matInput placeholder="Title" type="text"
         [(ngModel)]="todo.title" name="title">
     </mat-form-field>
 
