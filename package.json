@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "mocha ./e2e/*.test.js",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "docker:run": "docker run -p 3000:80 --rm todo-app:prod"
   },
   "private": true,
   "dependencies": {
