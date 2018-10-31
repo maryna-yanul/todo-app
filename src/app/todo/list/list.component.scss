@@ -62,13 +62,13 @@ h4 {
 .todo-conteiner {
   background-color: #fff;
   border-radius: 10px;
-  padding: 15px 10px;
   margin: 10px 0;
   box-shadow: 0px 0px 5px -1px;
   font-family: $font;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   &:hover {
     color: $main-color;
@@ -83,6 +83,11 @@ h4 {
     text-decoration: none;
     color: #000;
   }
+}
+
+.todo-conteiner__title {
+  padding: 15px;
+  flex: 1 1 75%;
 }
 
 hr {
@@ -105,7 +110,7 @@ hr {
 .todo-delete {
   display: none;
   color: #ACADBC;
-  padding: 0 10px;
+  padding: 10px;
 
   &:hover {
     color: red;

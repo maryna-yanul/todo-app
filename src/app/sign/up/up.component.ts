@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SignService } from '../../services/firebase/sign.service';
 import { User } from '../../shared/class/user';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-up',
@@ -18,7 +19,8 @@ export class UpComponent implements OnInit {
 
   constructor(
     private sign: SignService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -26,6 +28,10 @@ export class UpComponent implements OnInit {
 
   signUp() {
     this.sign.up(this.user)
+      .then(() => {
+        this.toast.success('Completed', 'Sign Up');
+        this.router.navigate(['/']);
+      })
       .catch(err => this.toast.error(err.message, 'Error', { disableTimeOut: true }));
   }
 

@@ -68,7 +68,6 @@ export class ListComponent implements OnInit {
       await this.todoService.changeStatus(id, type);
     }
     const newlist = await this.todoService.getAllTodo();
-    console.log('newlist: ', newlist);
 
     Object.assign(this, newlist);
   }

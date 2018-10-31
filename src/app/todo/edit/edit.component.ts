@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -6,7 +6,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { Subscription } from 'rxjs';
 import 'rxjs/add/operator/scan';
-import 'rxjs/add/operator/distinct';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/last';
 import 'rxjs/add/operator/map';
@@ -14,13 +14,14 @@ import 'rxjs/add/operator/mergeMap';
 
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../shared/class/todo';
+import { ImgWithSrc } from 'src/app/shared/class/image';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   todo: Todo = {
     title: '',
     description: '',
@@ -45,6 +46,8 @@ export class EditComponent implements OnInit {
 
   fileObserver: Subscription;
 
+  isSended = true; // HACK
+
   constructor(
     private route: ActivatedRoute,
     private todoService: TodoService,
@@ -67,8 +70,9 @@ export class EditComponent implements OnInit {
       .pluck('target')
       .pluck('files')
       .map((files: any) => files[files.length - 1])
-      .distinct()
+      .filter(file => file)
       .mergeMap(image => new Promise((resolve, reject) => {
+        this.newImages.push(image);
         const reader = new FileReader();
 
         reader.onload = event => {
@@ -82,8 +86,17 @@ export class EditComponent implements OnInit {
 
         reader.readAsDataURL(image);
       }))
-      .scan((images: any[] = [], image: any) => [...images, image], [])
-      .subscribe((images: any[]) => {
+      .filter((image: ImgWithSrc) => {
+        const hasSameImage = this.imagesPreUpload.find(img => img.src === image.src);
+
+        if (hasSameImage) {
+          this.newImages.pop();
+        }
+
+        return !hasSameImage;
+      })
+      .map((image: ImgWithSrc) => [...this.imagesPreUpload, image])
+      .subscribe((images: ImgWithSrc[]) => {
         this.imagesPreUpload = images;
       });
   }
@@ -117,11 +130,28 @@ export class EditComponent implements OnInit {
   }
 
   update() {
+    if (!this.isSended) {
+      return;
+    }
+
+    this.isSended = false;
+
     this.todoService.update(this.todo.id, { todo: this.todo, images: this.newImages })
-      .then(() => this.toast.success('', 'Updated'))
+      .then(async () => {
+        this.todo = await this.todoService.getTodo(this.todo.id);
+
+        this.todo.deadline = new Date(this.todo.deadline);
+        this.images = this.todo.images || [];
+
+        this.isSended = true;
+        this.newImages = [];
+        this.imagesPreUpload = [];
+        this.toast.success('', 'Updated');
+      })
       .catch(err => {
         console.error(err);
         this.toast.error('Something went wrong', 'Error');
+        this.isSended = true;
       });
   }
 

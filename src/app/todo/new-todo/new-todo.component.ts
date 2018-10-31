@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
@@ -18,7 +18,7 @@ const emptyTodo = {
   templateUrl: './new-todo.component.html',
   styleUrls: ['./new-todo.component.scss']
 })
-export class NewTodoComponent implements OnInit {
+export class NewTodoComponent implements OnInit, AfterViewInit {
   todo: Todo = {
     ...emptyTodo
   };

@@ -2,6 +2,6 @@
   
   <a class="app-header__main-page" routerLink="/">List</a>
   <i *ngIf="hasUser" (click)="signOut()" class="sign-out material-icons">exit_to_app</i>
-  <a *ngIf="!hasUser" routerLink="/sign/up">Sign Up</a>
+  <a class="sign-up" *ngIf="!hasUser" routerLink="/sign/up">Sign Up</a>
 </header>
 <router-outlet></router-outlet>

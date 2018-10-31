@@ -86,35 +86,31 @@
   position: absolute;
   top: 50%;
   cursor: pointer;
-  color: rgba(0, 0, 0, .45);
+  color: rgba(255, 255, 255, .4);
 
   &:hover {
-    color: rgba(0, 0, 0, .9);
+    color: rgba(255, 255, 255, .9);
   }
 }
 
-.todo-fullscreen-container__btn--next {
+.todo-fullscreen-container__btn--prev {
   transform: translate(-150%, -60%);
   left: 0;
+  padding: 0 10px;
 }
 
 .todo-fullscreen-container__btn--next {
-  transform: translate(150%, -60%);
+  transform: translate(135%, -60%);
   right: 0;
+  padding: 0 10px;
 }
 
 .todo-fullscreen-container__btn--close {
   position: absolute;
-  top: 0;
+  top: -10px;
   font-size: 18px;
-  font-weight: 900;
   transform: translateX(50%);
-  cursor: pointer;
-  color: rgba(0, 0, 0, .45);
-
-  &:hover {
-    color: rgba(0, 0, 0, .9);
-  }
+  padding: 10px;
 }
 
 .todo-images__title {

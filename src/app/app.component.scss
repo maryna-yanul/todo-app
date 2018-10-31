@@ -4,6 +4,7 @@
   left: 0;
   width: 100%;
   max-width: 100%;
+  z-index: 9;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
@@ -26,4 +27,9 @@
   align-self: center;
   padding: 0 10px;
   cursor: pointer;
+}
+
+.sign-up {
+  padding: 7px;
+  margin: 10px;
 }

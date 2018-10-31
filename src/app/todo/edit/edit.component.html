@@ -58,8 +58,8 @@
     <div class="todo-images layout-column" *ngIf="imagesPreUpload.length">
       <p class="todo-images__title">New Images</p>
       <div class="layout">
-        <div class="todo-image-small" *ngFor="let image of imagesPreUpload" [style.backgroundImage]="'url(' + image.src + ')'">
-          <mat-icon class="todo-image-small__delete" (click)="deleteNewImage(image.index)">delete_forever</mat-icon>
+        <div class="todo-image-small" *ngFor="let image of imagesPreUpload; let i = index" [style.backgroundImage]="'url(' + image.src + ')'">
+          <mat-icon class="todo-image-small__delete" (click)="deleteNewImage(i)">delete_forever</mat-icon>
         </div>
       </div>
     </div>
