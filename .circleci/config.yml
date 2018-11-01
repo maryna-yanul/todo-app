@@ -1,10 +1,14 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/project/todo-app
     docker:
       - image: circleci/node:8.11
     steps:
       - checkout
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -30,11 +34,16 @@ jobs:
       - run: bash ./sleep.sh
       - run: yarn e2e
   deploy:
+    working_directory: ~/project/todo-app
     docker:
       - image: circleci/node:8.11
     steps:
-      - checkout
-      - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
+      - run: npm i firebase-tools
+      - run: ls
+      - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
@@ -46,4 +55,6 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - circle
